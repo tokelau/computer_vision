@@ -137,27 +137,19 @@ if __name__ == "__main__":
         try:
            s = props[index].image 
            sym = recognite(s)
-           if recognite(s) == "":
-               print(index, count_hatch(props[index].image), props[index].image.shape[0] / props[index].image.shape[1])
            if count_symbols.get(sym):
                count_symbols[recognite(s)] = count_symbols[recognite(s)] + 1
-               symbols[recognite(s)].append(index)
            else:
                count_symbols[recognite(s)] = 1
-               symbols[recognite(s)] = []
-               symbols[recognite(s)].append(index)
            index += 1
         except IndexError:
             print(index)
             break
-#    count_hatch(s)
-#    print(recognite(s))
-    print(count_symbols)
-#    print(symbols)
-#    print(recognite(morphology.binary_dilation(np.rot90(props[162].image))))
-#    print(recognite(props[255].image), props[127].image.shape[0] / props[127].image.shape[1], count_hatch(props[127].image))
-#    print(recognite(props[55].image), props[55].image.shape[0] / props[55].image.shape[1])
-#    print(has_vline(s2))
+
+    recognized = 0
+    for key in count_symbols:
+        recognized += count_symbols[key]
+    print("распознаваемость:", recognized / index * 100)
     
     plt.figure()
 #    plt.subplot(121)
